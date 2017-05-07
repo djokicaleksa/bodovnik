@@ -27,3 +27,4 @@ Route::resource('activities', 'ActivityController');
 Route::post('/activities-user', 'UsersController@userActivityStore');
 Route::get('/home', 'HomeController@index');
 Route::get('/profile', 'ProfileController@edit');
+Route::resource('/files', 'ReportsController');

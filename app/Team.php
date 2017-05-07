@@ -18,4 +18,8 @@ class Team extends Model
         return $this->hasMany('App\User');
     }
 
+    public function reports(){
+        return $this->hasMany('App\Report');
+    }
+
 }
