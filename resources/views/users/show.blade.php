@@ -212,7 +212,7 @@
                     </div>
                     <div class="form-group">
                         <label>Rođendan</label>
-                        {!! Form::date('birthday', null, ['class'=>'form-control']) !!}
+                        {!! Form::date('birthday', \Carbon\Carbon::parse($user->birthday), ['class'=>'form-control']) !!}
                     </div>
 
                     <div class="form-group">

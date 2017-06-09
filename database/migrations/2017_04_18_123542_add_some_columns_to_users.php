@@ -17,7 +17,7 @@ class AddSomeColumnsToUsers extends Migration
             $table->integer('role_id');
             $table->integer('team_id');
             $table->timestamp('birthday')->nullable();
-            $table->string('phone');
+            $table->string('phone')->nullable();
         });
     }
 

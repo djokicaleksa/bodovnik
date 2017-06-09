@@ -107,7 +107,8 @@
                                 </table>
 
                                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#profile">Izmeni profil</button>
-                                <a href="#" class="btn btn-primary">Team</a>
+                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#passwordChange">Izmeni šifru</button>
+                                <!-- <a href="#" class="btn btn-primary">Team</a> -->
                             </div>
                         </div>
                     </div>
@@ -156,7 +157,7 @@
                 </tbody>
             </table>
         </div>
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Dodaj aktivnost</button>
+        <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Dodaj aktivnost</button> -->
     </div>
 
     <!-- Modal -->
@@ -196,8 +197,8 @@
                     <h4 class="modal-title">Izmeni profil</h4>
                 </div>
                 <div class="modal-body">
-                    {!! Form::model($user, ['method'=>'put', 'action'=>['UsersController@update', $user->id], 'files'=>true]) !!}
-
+                    {!! Form::model($user, ['method'=>'patch', 'action'=>['ProfileController@update', $user->id], 'files'=>true]) !!}
+                    {!! csrf_field()!!}
                     <div class="form-group">
                         <label>Ime i prezime</label>
                         {!! Form::text('name', null, ['class'=>'form-control']) !!}
@@ -205,7 +206,7 @@
 
                     <div class="form-group">
                         <label>Rođendan</label>
-                        {!! Form::date('birthday', null, ['class'=>'form-control']) !!}
+                        {!! Form::date('birthday', \Carbon\Carbon::parse($user->birthday), ['class'=>'form-control']) !!}
                     </div>
 
                     <div class="form-group">
@@ -230,6 +231,32 @@
 
         </div>
     </div>
+
+
+     <div id="passwordChange" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Promena šifre</h4>
+                        </div>
+                        <div class="modal-body">
+                            {!! Form::model($user, ['method'=>'patch', 'action'=>['ProfileController@passwordUpdate', $user->id], 'class'=>'form-vertical']) !!}
+                                {!! Form::password('old_password', ['class'=>'form-control', 'placeholder'=>'Unesite staru šifru']) !!}<br>
+                                {!! Form::password('password', ['class'=>'form-control', 'placeholder'=>'Unesite novu šifru']) !!}<br>
+                                {!! Form::password('password_confirmation', ['class'=>'form-control', 'placeholder'=>'Ponovite novu šifru']) !!}<br>
+                                {!! Form::submit('Sačuvaj', ['class'=>'btn btn-success']) !!}
+                            {!! Form::close() !!}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 @endsection
 @section('footer')
     <script type="text/javascript" src="{{url('js/select2/dist/js/select2.js')}}"></script>

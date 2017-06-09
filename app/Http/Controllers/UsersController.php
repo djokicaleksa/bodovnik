@@ -98,17 +98,15 @@ class UsersController extends Controller
     {
         $input = $request->all();
         $user = User::findOrFail($id);
-
         if($file = $request->file('image')) {
             $file_name = time() . $file->getClientOriginalName();
-            Storage::disk('public')->put($file_name, File::get($file));
-            $image = 'storage/' . $file_name;
+            $file->move(public_path('/images'), $file_name);
+            $image = '/images/' . $file_name;
             $input['image'] =  $image;
         }
-//        return $input;
         $user->update($input);
 
-        return redirect('users/'.$id);
+        return redirect()->back();
 
     }
 

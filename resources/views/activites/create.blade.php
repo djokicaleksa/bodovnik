@@ -31,8 +31,8 @@
                 {!! Form::number('points', null, ['class'=>'form-control']) !!}
             </div>
             <div class="form-group">
-                <label>Oblast</label>
-                {!! Form::select('team_id', [''=>'Izaberite tim lidera'] + $teams->all(), null, ['style'=>'width:100%;']) !!}
+                <label>Tim</label>
+                {!! Form::select('team_id', [''=>'Izaberite tim'] + $teams->all(), null, ['style'=>'width:100%;']) !!}
             </div>
 
             <div class="form-group">

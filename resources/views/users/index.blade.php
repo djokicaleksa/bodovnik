@@ -34,7 +34,7 @@
             <tr>
                 <td>{{$user->name}}</td>
                 <td>{{$user->team->name}}</td>
-                <td>64</td>
+                <td>{{$user->points()}}</td>
                 <td>
                     <a href="{{url('/users/'.$user->id)}}" class="btn btn-warning">Prikaži</a>
                     @if(Auth::user()->isAdmin())

@@ -28,7 +28,7 @@ class TeamController extends Controller
     public function create()
     {
         $route = "Novi tim";
-        $users = User::pluck('name','id');
+        $users = User::where('role_id', 1)->pluck('name','id');
         return view('teams.create', compact('route','users'));
     }
 

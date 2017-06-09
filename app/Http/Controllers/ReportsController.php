@@ -49,10 +49,10 @@ class ReportsController extends Controller
         $input['user_id'] = $user->id;
         $team = Team::findOrFail($input['team_id']);
         if($file = $request->file('report')) {
-            $file_name = $team->name . '/' . time() . $file->getClientOriginalName();
-            Storage::disk('public')->put($file_name, File::get($file));
-            $image = 'storage/' . $file_name;
-            $input['url'] =  $image;
+            $file_name = time() . $file->getClientOriginalName();
+            $file->move(public_path('/reports/' . $team->name . '/'), $file_name);
+            $report = '/reports/' . $team->name . '/' . $file_name;
+            $input['url'] =  $report;
             $input['name'] = $file_name;
         }
         Report::create($input);
@@ -102,6 +102,7 @@ class ReportsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Report::findOrFail($id)->delete();
+        return redirect()->back();
     }
 }

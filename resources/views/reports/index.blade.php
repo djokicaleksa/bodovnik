@@ -29,6 +29,9 @@
                         <th>Postavio</th>
                         <th>Datum</th>
                         <th>Download</th>
+                        @if(Auth::user()->isAdmin())
+                            <th></th>
+                        @endif    
                     </tr>
                     </thead>
                     <tbody>
@@ -38,6 +41,13 @@
                             <td>{{$report->user->name}}</td>
                             <td>{{$report->created_at}}</td>
                             <td><a href="{{url($report->url)}}" >link</a></td>
+                            @if(Auth::user()->isAdmin())
+                                <td>
+                                    {!! Form::model($report, ['method'=>'delete', 'action'=>['ReportsController@destroy', $report->id]]) !!}
+                                        {!! Form::submit("Izbriši", ['class'=>'btn btn-danger']) !!}
+                                    {!! Form::close() !!}    
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>
