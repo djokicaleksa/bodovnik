@@ -79,15 +79,16 @@
                 <li class="{{ Request::is('/') ? 'active' : '' }}">
                     <a href="{{url('/')}}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                 </li>
-                <li class="{{ Request::is('users*') ? 'active' : '' }}">
-                    <a href="{{url('users')}}"><i class="fa fa-fw fa-user"></i> Članovi</a>
-                </li>
                 <li class="{{ Request::is('teams*') ? 'active' : '' }}">
                     <a href="{{url('teams')}}"><i class="fa fa-fw fa-users"></i> Timovi</a>
                 </li>
                 <li class="{{ Request::is('activities*') ? 'active' : '' }}">
                     <a href="{{url('activities')}}"><i class="fa fa-fw fa-dashboard"></i> Aktivnosti</a>
                 </li>
+                <li class="{{ Request::is('/meetings') ? 'active' : '' }}">
+                    <a href="{{url('/meetings')}}"><i class="fa fa-fw fa-dashboard"></i> Sastanci</a>
+                </li>
+                <li cl
                 <li class="{{ Request::is('files*') ? 'active' : '' }}">
                     <a href="{{url('files')}}"><i class="fa fa-fw fa-file"></i> Fajlovi</a>
                 </li>

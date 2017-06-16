@@ -80,7 +80,10 @@ class TeamController extends Controller
      */
     public function update(Request $request, Team $team)
     {
-        //
+        $input = $request->all();
+        $team->update($input);
+        return redirect('teams'. $team->id);
+    
     }
 
     /**

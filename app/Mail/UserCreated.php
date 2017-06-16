@@ -31,7 +31,7 @@ class UserCreated extends Mailable
      */
     public function build()
     {
-        return $this->from('info@sofa.rs')
+        return $this->from('info@drive.sofa.rs')
                     ->view('emails.user_info');
     }
 }

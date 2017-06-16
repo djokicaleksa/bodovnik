@@ -13,11 +13,49 @@ class TeamSeeder extends Seeder
     {
         DB::table('teams')->insert(
 
-            ['name' => 'admin']
+            [
+                'name' => 'IT',
+                'team_leader' => 1
+            ]
         );
-        DB::table('roles')->insert(
+        DB::table('teams')->insert(
 
-            ['name' => 'user']
+            [
+                'name' => 'HR',
+                'team_leader' => 1
+            ]
+        );
+
+        DB::table('teams')->insert(
+
+            [
+                'name' => 'SPORT',
+                'team_leader' => 1
+            ]
+        );
+
+        DB::table('teams')->insert(
+
+            [
+                'name' => 'CR',
+                'team_leader' => 1
+            ]
+        );
+
+        DB::table('teams')->insert(
+
+            [
+                'name' => 'PR',
+                'team_leader' => 1
+            ]
+        );
+
+        DB::table('teams')->insert(
+
+            [
+                'name' => 'Finansije',
+                'team_leader' => 1
+            ]
         );
     }
 }

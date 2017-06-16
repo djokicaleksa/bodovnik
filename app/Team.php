@@ -22,4 +22,8 @@ class Team extends Model
         return $this->hasMany('App\Report');
     }
 
+    public function meetings(){
+        return $this->hasMany('App\Meetings');
+    }
+
 }

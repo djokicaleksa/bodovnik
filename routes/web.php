@@ -32,3 +32,7 @@ Route::patch('/profile/password-update', 'ProfileController@passwordUpdate');
 Route::patch('/profile/update/{id}', 'ProfileController@update');
 Route::delete('files', 'ReportsController@destroy');
 Route::resource('/files', 'ReportsController');
+
+Route::resource('/meetings', 'MeetingController');
+
+Route::get('teams-change', 'MeetingController@teamFeed');
