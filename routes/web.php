@@ -23,7 +23,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::resource('teams', 'TeamController');
 Route::resource('users', 'UsersController');
-Route::resource('activities', 'ActivityController');
+//Route::resource('activities', 'ActivityController');
 Route::post('/activities-user', 'UsersController@userActivityStore');
 Route::get('/home', 'HomeController@index');
 

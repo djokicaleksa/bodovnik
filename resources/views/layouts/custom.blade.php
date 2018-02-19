@@ -82,9 +82,9 @@
                 <li class="{{ Request::is('teams*') ? 'active' : '' }}">
                     <a href="{{url('teams')}}"><i class="fa fa-fw fa-users"></i> Timovi</a>
                 </li>
-                <li class="{{ Request::is('activities*') ? 'active' : '' }}">
-                    <a href="{{url('activities')}}"><i class="fa fa-fw fa-dashboard"></i> Aktivnosti</a>
-                </li>
+                {{--<li class="{{ Request::is('activities*') ? 'active' : '' }}">--}}
+                    {{--<a href="{{url('activities')}}"><i class="fa fa-fw fa-dashboard"></i> Aktivnosti</a>--}}
+                {{--</li>--}}
                 <li class="{{ Request::is('/meetings') ? 'active' : '' }}">
                     <a href="{{url('/meetings')}}"><i class="fa fa-fw fa-dashboard"></i> Sastanci</a>
                 </li>
