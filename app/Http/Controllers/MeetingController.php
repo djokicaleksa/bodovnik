@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class MeetingController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin', ['only' => ['store', 'destroy', 'edit', 'update']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

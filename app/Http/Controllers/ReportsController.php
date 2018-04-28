@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Mail;
 
 class ReportsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin', ['only' => ['store', 'destroy', 'edit', 'update']]);
+    }
     /**
      * Display a listing of the resource.
      *

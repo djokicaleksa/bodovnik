@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin', ['only' => ['store', 'destroy', 'edit', 'update', 'create']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

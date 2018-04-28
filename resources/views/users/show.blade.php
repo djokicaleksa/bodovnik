@@ -93,10 +93,7 @@
                                         <td>Telefon:</td>
                                         <td>{{$user->phone}}</td>
                                     </tr>
-                                    <tr>
-                                        <td>Home Address</td>
-                                        <td>Kathmandu,Nepal</td>
-                                    </tr>
+
                                     <tr>
                                         <td>Email</td>
                                         <td><a href="mailto:{{$user->email}}">{{$user->email}}</a></td>
@@ -107,7 +104,6 @@
                                 </table>
 
                                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#profile">Izmeni profil</button>
-                                <a href="#" class="btn btn-primary">Team</a>
                             </div>
                         </div>
                     </div>
@@ -130,8 +126,8 @@
                 <thead>
                 <tr>
                     <th>Naziv aktivnosti</th>
-                    <th>Oblast</th>
                     <th>Broj bodova</th>
+                    <th>Detalji</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -141,8 +137,41 @@
                 @foreach($user->activities as $activity)
                 <tr>
                     <td>{{$activity->name}}</td>
-                    <td>{{$activity->team->name}}</td>
+                    {{--<td>{{$activity->team->name}}</td>--}}
                     <td>{{$activity->points}}</td>
+                    <td>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#activityModal{{$activity->id}}">+</button>
+                        @if(Auth::user()->isAdmin())
+                        {!! Form::open(['method' => 'DELETE', 'action' => 'ActivityController@destroy', 'style'=> 'display:inline']) !!}
+                            {!! Form::submit('-', ['class'=>'btn btn-danger']) !!}
+                        {!! Form::close() !!}
+                        @endif
+                    </td>
+
+                    <div id="activityModal{{$activity->id}}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Detalji aktivnosti</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <h3>{{$activity->name}}</h3>
+                                    <label>Ispoštovan rok</label>  {{$activity->ispostovan_rok}}<br>
+                                    <label>Tačno urađen zadatak</label>  {{$activity->tacno_uradjen_zadatak}}<br>
+                                    <label>U potpunosti odrađen zadatak</label>  {{$activity->u_potpunosti_odradjen_zadatak}}<br>
+                                    <label>Kvalitet</label>  {{$activity->kvalitet}}<br>
+                                    <label>Ukupno</label>  {{$activity->points()}}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </tr>
                     @php
                         $total += $activity->points;
@@ -150,7 +179,6 @@
                 @endforeach
                 <tr>
                     <td>Total:</td>
-                    <td></td>
                     <td>{{$total}}</td>
                 </tr>
                 </tbody>
@@ -170,10 +198,51 @@
                     <h4 class="modal-title">Dodaj aktivnost</h4>
                 </div>
                 <div class="modal-body">
-                    {!! Form::open(['method'=>'post', 'action'=>'UsersController@userActivityStore']) !!}
-                    {!! Form::select('activity', [''=>'Izaberite aktivnost'] + $activities->all(), null, ['class'=>'form-control', 'style'=>'width:100%;']) !!}
+                    {!! Form::open(['method'=>'post', 'action'=>'ActivityController@store']) !!}
+                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => "Naziv aktivnosti"]) !!}
                     <br>
-                    <input type="hidden" name="user" value="{{$user->id}}">
+                    <label>
+                        Ispoštovan rok<br>
+                        <label>1<input type="radio" name="ispostovan_rok" value="1"></label>
+                        <label>2<input type="radio" name="ispostovan_rok" value="2"></label>
+                        <label>3<input type="radio" name="ispostovan_rok" value="3"></label>
+                        <label>4<input type="radio" name="ispostovan_rok" value="4"></label>
+                        <label>5<input type="radio" name="ispostovan_rok" value="5"></label>
+                    </label>
+
+                    <br>
+                    <label>
+                        Tačno urađen zadatak<br>
+                        <label>1<input type="radio" name="tacno_uradjen_zadatak" value="1"></label>
+                        <label>2<input type="radio" name="tacno_uradjen_zadatak" value="2"></label>
+                        <label>3<input type="radio" name="tacno_uradjen_zadatak" value="3"></label>
+                        <label>4<input type="radio" name="tacno_uradjen_zadatak" value="4"></label>
+                        <label>5<input type="radio" name="tacno_uradjen_zadatak" value="5"></label>
+                    </label>
+
+                    <br>
+                    <label>
+                        U potpunosti odrađen zadatak<br>
+                        <label>1<input type="radio" name="u_potpunosti_odradjen_zadatak" value="1"></label>
+                        <label>2<input type="radio" name="u_potpunosti_odradjen_zadatak" value="2"></label>
+                        <label>3<input type="radio" name="u_potpunosti_odradjen_zadatak" value="3"></label>
+                        <label>4<input type="radio" name="u_potpunosti_odradjen_zadatak" value="4"></label>
+                        <label>5<input type="radio" name="u_potpunosti_odradjen_zadatak" value="5"></label>
+                    </label>
+
+                    <br>
+                    <label>
+                        Kvalitet<br>
+                        <label>1<input type="radio" name="kvalitet" value="1"></label>
+                        <label>2<input type="radio" name="kvalitet" value="2"></label>
+                        <label>3<input type="radio" name="kvalitet" value="3"></label>
+                        <label>4<input type="radio" name="kvalitet" value="4"></label>
+                        <label>5<input type="radio" name="kvalitet" value="5"></label>
+                    </label>
+                    <br>
+
+                    {!! Form::date('datum', \Carbon\Carbon::now(), ['class'=>'form-control']) !!}
+                    <input type="hidden" name="user_id" value="{{$user->id}}"><br>
                     {!! Form::submit('Dodaj', ['class'=>'btn btn-info']) !!}
                     {!! Form::close() !!}
                 </div>

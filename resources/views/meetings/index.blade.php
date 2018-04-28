@@ -75,6 +75,8 @@
                     <br>
                     {!! Form::text('location', null, ['class'=>'form-control', 'placeholder'=>'Lokacija']) !!}
                     <br>
+                    {!! Form::date('datum', \Carbon\Carbon::now(), ['class'=>'form-control']) !!}
+                    <br>
                     <div id="users">
 
                     </div>

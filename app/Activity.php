@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
     protected $fillable = [
-        'name', 'points', 'team_id'
+        'name', 'points', 'user_id', 'ispostovan_rok', 'tacno_uradjen_zadatak', 'u_potpunosti_odradjen_zadatak', 'kvalitet'
     ];
 
     public function team(){
@@ -16,5 +16,9 @@ class Activity extends Model
 
     public function users(){
         return $this->belongsToMany('App\Users');
+    }
+
+    public function points(){
+        return $this->ispostovan_rok + $this->tacno_uradjen_zadatak + $this->u_potpunosti_odradjen_zadatak + $this->kvalitet;
     }
 }

@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin', ['only' => ['store', 'destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,8 +47,9 @@ class ActivityController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $input['points'] = $input['ispostovan_rok'] + $input['tacno_uradjen_zadatak'] + $input['u_potpunosti_odradjen_zadatak'] + $input['kvalitet'];
         Activity::create($input);
-        return redirect('activities');
+        return redirect('users/' . $input['user_id']);
     }
 
     /**
@@ -93,7 +100,7 @@ class ActivityController extends Controller
     public function destroy(Activity $activity)
     {
         $activity->delete();
-        return redirect('activities');
+        return redirect()->back();
     }
 
 }

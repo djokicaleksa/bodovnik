@@ -85,7 +85,7 @@
                                     </tr>
                                     <tr>
                                         <td>Rodjendan</td>
-                                        <td>{{date('d.m.Y',strtotime($user->birthday))}}</td>
+                                        <td>{{$user->birthday}}</td>
                                     </tr>
 
                                     <tr>
@@ -93,10 +93,7 @@
                                         <td>Telefon:</td>
                                         <td>{{$user->phone}}</td>
                                     </tr>
-                                    <tr>
-                                        <td>Home Address</td>
-                                        <td>Kathmandu,Nepal</td>
-                                    </tr>
+
                                     <tr>
                                         <td>Email</td>
                                         <td><a href="mailto:{{$user->email}}">{{$user->email}}</a></td>
@@ -131,8 +128,8 @@
                 <thead>
                 <tr>
                     <th>Naziv aktivnosti</th>
-                    <th>Oblast</th>
                     <th>Broj bodova</th>
+                    <th>Detalji</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -140,18 +137,43 @@
                     $total = 0;
                 @endphp
                 @foreach($user->activities as $activity)
-                <tr>
-                    <td>{{$activity->name}}</td>
-                    <td>{{$activity->team->name}}</td>
-                    <td>{{$activity->points}}</td>
-                </tr>
+                    <tr>
+                        <td>{{$activity->name}}</td>
+                        {{--<td>{{$activity->team->name}}</td>--}}
+                        <td>{{$activity->points}}</td>
+                        <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#activityModal{{$activity->id}}">+</button></td>
+
+                        <div id="activityModal{{$activity->id}}" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Detalji aktivnosti</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h3>{{$activity->name}}</h3>
+                                        <label>Ispoštovan rok</label>  {{$activity->ispostovan_rok}}<br>
+                                        <label>Tačno urađen zadatak</label>  {{$activity->tacno_uradjen_zadatak}}<br>
+                                        <label>U potpunosti odrađen zadatak</label>  {{$activity->u_potpunosti_odradjen_zadatak}}<br>
+                                        <label>Kvalitet</label>  {{$activity->kvalitet}}<br>
+                                        <label>Ukupno</label>  {{$activity->points()}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </tr>
                     @php
                         $total += $activity->points;
                     @endphp
                 @endforeach
                 <tr>
                     <td>Total:</td>
-                    <td></td>
                     <td>{{$total}}</td>
                 </tr>
                 </tbody>

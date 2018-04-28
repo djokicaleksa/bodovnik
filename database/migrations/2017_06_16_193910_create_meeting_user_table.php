@@ -17,6 +17,7 @@ class CreateMeetingUserTable extends Migration
             $table->increments('id');
             $table->integer('meetings_id');
             $table->integer('user_id');
+            $table->date('datum');
             $table->timestamps();
         });
     }

@@ -43,7 +43,7 @@ class User extends Authenticatable
     }
 
     public function activities(){
-        return $this->belongsToMany('App\Activity')->withTimestamps();
+        return $this->hasMany('App\Activity');
     }
 
     public function points(){
@@ -53,5 +53,21 @@ class User extends Authenticatable
         }
 
         return $points;
+    }
+
+    public function getImageAttribute($image){
+
+        if($image == null){
+            return "https://www.whittierplf.org/wp-content/uploads/default-user-image-e1501670968910-circle-300x300.png";
+        }
+        return $image;
+    }
+
+    public function getBirthdayAttribute($birthday){
+        if(!is_null($birthday)){
+            return date('d.m.Y', strtotime($birthday));
+        }
+
+        return null;
     }
 }
