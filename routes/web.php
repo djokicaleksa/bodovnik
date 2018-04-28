@@ -26,7 +26,7 @@ Route::resource('users', 'UsersController');
 //Route::resource('activities', 'ActivityController');
 
 Route::post('activities', 'ActivityController@store');
-Route::delete('activities', 'ActivityController@destroy');
+Route::delete('activities/{activity}', 'ActivityController@destroy');
 Route::post('/activities-user', 'UsersController@userActivityStore');
 Route::get('/home', 'HomeController@index');
 

@@ -142,7 +142,7 @@
                     <td>
                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#activityModal{{$activity->id}}">+</button>
                         @if(Auth::user()->isAdmin())
-                        {!! Form::open(['method' => 'DELETE', 'action' => 'ActivityController@destroy', 'style'=> 'display:inline']) !!}
+                        {!! Form::model($activity, ['method' => 'DELETE', 'action' => ['ActivityController@destroy', $activity], 'style'=> 'display:inline']) !!}
                             {!! Form::submit('-', ['class'=>'btn btn-danger']) !!}
                         {!! Form::close() !!}
                         @endif

@@ -57,7 +57,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $input['image'] = 'storage/user.png';
+//        $input['image'] = 'storage/user.png';
         $password = rand(pow(10, 6), pow(10, 7)-1);
         $input['password'] = Hash::make($password);
         $user = User::create($input);
